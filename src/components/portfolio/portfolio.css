@@ -1,0 +1,90 @@
+.portfolio__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    align-items: start; /* Aligns items at the start of each cell */
+}
+
+.portfolio__item {
+    background: var(--color-bg-variant);
+    padding: 1.2rem;
+    border-radius: 2rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Distribute space */
+    height: 100%; /* Equal height */
+}
+
+.portfolio__item:hover {
+    border-color: var(--color-primary-variant);
+    background: transparent;
+    transform: translateY(-5px) scale(1.03); /* Hover effect with scale */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.portfolio__item-image {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Ensures images cover the area nicely */
+    transition: transform 0.3s ease; /* Smooth transition for image scaling */
+}
+
+.portfolio__item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.portfolio__item:hover .portfolio__item-image img {
+    transform: scale(1.1);
+}
+
+.portfolio__item h3 {
+    margin: 1.2rem 0 2rem;
+    transition: color 0.3s ease; /* Transition for text color */
+}
+
+.portfolio__item-cta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.portfolio__item-desc {
+    padding: 0.5rem; /* Adds padding around the text */
+    font-size: 0.9rem; /* Adjust font size as needed */
+    color: #666; /* Optional: change the text color */
+    line-height: 1.4; /* Improves readability */
+    transition: color 0.3s ease; /* Transition for text color */
+}
+
+.portfolio__item:hover .portfolio__item-desc {
+    color: var(--color-primary); /* Or any other color */
+}
+
+/* Medium Devices */
+@media screen and (max-width: 1024px) { 
+    .portfolio__container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Small Devices */
+@media screen and (max-width: 600px) {
+    .portfolio__container {
+        grid-template-columns: 1fr;
+    }
+}
