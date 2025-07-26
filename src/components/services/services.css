@@ -1,77 +1,300 @@
-.services__container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+/* Section Header - Centered */
+.services__header {
+  text-align: center;
+  margin-bottom: 4rem;
 }
 
-.service{
-    background: var(--color-bg-variant);
-    border-radius: 0 0 2rem 2rem;
-    border: 1px solid var(--color-primary);
-    height: fit-content;
-    transition: var(--transition);
+.services__header h5 {
+  color: var(--color-light);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.services__header h2 {
+  color: var(--color-primary);
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+.services__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+}
+
+.service {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-variant),
+    rgba(77, 181, 255, 0.05)
+  );
+  border-radius: 2rem;
+  border: 1px solid rgba(77, 181, 255, 0.1);
+  height: fit-content;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.service::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(77, 181, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.service:hover::before {
+  left: 100%;
 }
 
 .service:hover {
-    background: transparent;
-    border-color: var(--color-primary-variant);
-    cursor: default;
+  background: rgba(77, 181, 255, 0.08);
+  border-color: var(--color-primary-variant);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(77, 181, 255, 0.2);
 }
 
-.service__head{
-    background: var(--color-primary);
-    padding: 2rem;
-    border-radius: 0 0 2rem 2rem;
-    box-shadow: 0 2rem 1rem rgba(0, 0 ,0 , 0.1);
+.service__head {
+  background: linear-gradient(135deg, var(--color-primary), #2c2c6c);
+  padding: 2.5rem 2rem;
+  border-radius: 2rem 2rem 0 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.service__icon {
+  background: rgba(255, 255, 255, 0.2);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.service__icon svg {
+  font-size: 2rem;
+  color: var(--color-white);
 }
 
 .service__head h3 {
-    color: var(--color-bg);
-    font-size: 1rem;
-    text-align: center;
+  color: var(--color-white);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.service__description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .service__list {
-    padding: 2rem;
+  padding: 2rem;
+  flex-grow: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .service__list li {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 0.8rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  align-items: flex-start;
 }
 
 .service__list-icon {
-    color: var(--color-primary);
-    margin-top: 2px;
+  color: var(--color-primary);
+  margin-top: 2px;
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
 .service__list p {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--color-light);
+  line-height: 1.5;
+  margin: 0;
 }
 
- /* ========MEDIA QUERIES (MEDIUM DEVICES) ========== */
+/* Hover effects for individual list items */
+.service__list li:hover {
+  transform: translateX(5px);
+  transition: transform 0.2s ease;
+}
 
- @media screen and (max-width: 1024px) { 
-        .service__container {
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
+.service__list li:hover .service__list-icon {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
 
-        .service {
-            height: auto;
-            
-        }
- }
+/* Remove overrides from section styles */
+#services h5,
+#services h2 {
+  text-align: center;
+}
 
+#services h2 {
+  color: var(--color-primary);
+  margin-bottom: 0;
+}
 
- 
- /* ========MEDIA QUERIES (SMALL DEVICES) ========== */
+#services h5 {
+  color: var(--color-light);
+}
 
- @media screen and (max-width: 600px) {
-    .service__container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
+/* ========MEDIA QUERIES (MEDIUM DEVICES) ========== */
+@media screen and (max-width: 1024px) {
+  .services__header {
+    margin-bottom: 3rem;
+  }
 
- }
+  .services__header h2 {
+    font-size: 1.8rem;
+  }
+
+  .services__container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .service__head {
+    padding: 2rem 1.5rem;
+  }
+
+  .service__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .service__icon svg {
+    font-size: 1.8rem;
+  }
+
+  .service__head h3 {
+    font-size: 1.2rem;
+  }
+
+  .service__list {
+    padding: 1.5rem;
+  }
+}
+
+/* ========MEDIA QUERIES (SMALL DEVICES) ========== */
+@media screen and (max-width: 600px) {
+  .services__header {
+    margin-bottom: 2rem;
+  }
+
+  .services__header h2 {
+    font-size: 1.6rem;
+  }
+
+  .services__container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .service__head {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .service__icon {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .service__icon svg {
+    font-size: 1.5rem;
+  }
+
+  .service__head h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .service__description {
+    font-size: 0.85rem;
+  }
+
+  .service__list {
+    padding: 1.2rem;
+  }
+
+  .service__list li {
+    margin-bottom: 1rem;
+    gap: 0.8rem;
+  }
+
+  .service__list p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Enhanced accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .service::before {
+    transition: none;
+  }
+
+  .service:hover {
+    transform: none;
+  }
+
+  .service__list li:hover {
+    transform: none;
+  }
+}
+
+/* Dark theme enhancements */
+@media (prefers-color-scheme: dark) {
+  .service {
+    background: linear-gradient(
+      135deg,
+      var(--color-bg-variant),
+      rgba(77, 181, 255, 0.03)
+    );
+    border-color: rgba(77, 181, 255, 0.08);
+  }
+
+  .service:hover {
+    background: rgba(77, 181, 255, 0.06);
+  }
+}
+
+/* Print styles */
+@media print {
+  .service::before {
+    display: none;
+  }
+
+  .service {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+  }
+
+  .service__head {
+    background: #f8f9fa !important;
+    color: #333 !important;
+  }
+}

@@ -1,85 +1,178 @@
 header {
-    height: 100vh;
-    padding-top: 7rem;
-    overflow: hidden;
+  height: 100vh;
+  padding-top: 7rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1f1f38 0%, #2c2c6c 100%);
+  position: relative;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 20% 50%,
+      rgba(77, 181, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(77, 181, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      rgba(77, 181, 255, 0.1) 0%,
+      transparent 50%
+    );
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .header__container {
-    text-align: center;
-    height: 100%;
-    position: relative;
+  text-align: center;
+  height: 100%;
+  position: relative;
+  z-index: 1;
 }
 
+.header__container h1 {
+  background: linear-gradient(45deg, #4db5ff, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3rem;
+  margin: 1rem 0;
+}
 
 /* =======CTA ======== */
-
-.cta{
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
+.cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
 }
 
 /* =======HEADER SOCIALS ======== */
 .header__socials {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    gap: 0.8rem;
-    left: 0;
-    bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  gap: 0.8rem;
+  left: 0;
+  bottom: 3rem;
+  z-index: 2;
 }
 
 .header__socials::after {
-    content: '';
-    width: 1px;
-    height: 2rem;
-    background-color: var(--color-primary);
+  content: "";
+  width: 1px;
+  height: 2rem;
+  background-color: var(--color-primary);
+}
+
+.header__socials a {
+  padding: 0.8rem;
+  background: rgba(77, 181, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.header__socials a:hover {
+  background: var(--color-primary);
+  transform: translateY(-5px);
 }
 
 /* =======ME ======== */
-.me{
-    width: 22rem;
-    height: 30rem;
-    position: absolute;
-    left: calc(50% - 11rem);
-    margin-top: 4rem;
-    border-radius: 12rem 12rem 0 0;
-    overflow: hidden;
+.me {
+  width: 22rem;
+  height: 30rem;
+  position: absolute;
+  left: calc(50% - 11rem);
+  margin-top: 4rem;
+  border-radius: 12rem 12rem 0 0;
+  overflow: hidden;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 0 30px rgba(77, 181, 255, 0.3);
+  transition: all 0.3s ease;
 }
 
+.me:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(77, 181, 255, 0.5);
+}
+
+.me img {
+  transition: all 0.3s ease;
+}
+
+.me:hover img {
+  transform: scale(1.1);
+}
 
 /* ======SCROLL DOWN ====== */
 .scroll__down {
-    position: absolute;
-    right: -2.3rem;
-    bottom: 5rem;
-    transform: rotate(90deg);
-    font-weight: 300;
-    font-size: 0.9rem;
+  position: absolute;
+  right: -2.3rem;
+  bottom: 5rem;
+  transform: rotate(90deg);
+  font-weight: 300;
+  font-size: 0.9rem;
+  animation: bounce 2s infinite;
 }
 
+@keyframes bounce {
+  0%,
+  100% {
+    transform: rotate(90deg) translateY(0);
+  }
+  50% {
+    transform: rotate(90deg) translateY(-10px);
+  }
+}
 
- /* ========MEDIA QUERIES (MEDIUM DEVICES) ========== */
+/* ========MEDIA QUERIES (MEDIUM DEVICES) ========== */
+@media screen and (max-width: 1024px) {
+  header {
+    height: 68vh;
+  }
 
- @media screen and (max-width: 1024px) { 
-    header{
-        height: 68vh;
-    }
- }
+  .header__container h1 {
+    font-size: 2.5rem;
+  }
+}
 
-
- 
- /* ========MEDIA QUERIES (SMALL DEVICES) ========== */
-
- @media screen and (max-width: 600px) {
-   header {
+/* ========MEDIA QUERIES (SMALL DEVICES) ========== */
+@media screen and (max-width: 600px) {
+  header {
     height: 100vh;
-   }
+  }
 
-   .header__socials,
-   .scroll__down {
+  .header__socials,
+  .scroll__down {
     display: none;
-   }
- }
+  }
+
+  .header__container h1 {
+    font-size: 2rem;
+  }
+
+  .me {
+    width: 18rem;
+    height: 25rem;
+    left: calc(50% - 9rem);
+  }
+}

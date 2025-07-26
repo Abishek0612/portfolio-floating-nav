@@ -1,13 +1,36 @@
-import React from 'react'
-// import resume from '../../assets/resume.pdf'
+import React from "react";
+import { motion } from "framer-motion";
 
 const CTA = () => {
-  return (
-    <div className='cta'>
-        {/* <a href={resume} download className='btn'>Download CV</a> */}
-        <a href='#contact' className='btn btn-primary'>Let's Talk</a>
-    </div>
-  )
-}
+  const resumeLink = "/Abishek_Resume.pdf";
 
-export default CTA
+  return (
+    <div className="cta">
+      <motion.a
+        href={resumeLink}
+        download="Abishek_U_Resume.pdf"
+        className="btn"
+        whileHover={{
+          scale: 1.05,
+          boxShadow: "0 5px 15px rgba(77, 181, 255, 0.3)",
+        }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Download CV
+      </motion.a>
+      <motion.a
+        href="#contact"
+        className="btn btn-primary"
+        whileHover={{
+          scale: 1.05,
+          boxShadow: "0 5px 15px rgba(77, 181, 255, 0.3)",
+        }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Let's Talk
+      </motion.a>
+    </div>
+  );
+};
+
+export default CTA;

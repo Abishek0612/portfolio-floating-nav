@@ -1,0 +1,128 @@
+.education__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.education__content h3,
+.projects__content h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.education__item,
+.project__item {
+  background: var(--color-bg-variant);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid transparent;
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.education__item:hover,
+.project__item:hover {
+  background: transparent;
+  border-color: var(--color-primary-variant);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(77, 181, 255, 0.1);
+}
+
+.education__header,
+.project__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.education__header h4,
+.project__header h4 {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status.pursuing {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.status.completed {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.project__type {
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(77, 181, 255, 0.2);
+  color: var(--color-primary);
+}
+
+.education__item h5 {
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+}
+
+.education__period {
+  color: var(--color-light);
+  font-size: 0.9rem;
+}
+
+.project__item p {
+  color: var(--color-light);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.project__technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech__badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  background: rgba(77, 181, 255, 0.1);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary-variant);
+}
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+  .education__container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .education__header,
+  .project__header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .education__item,
+  .project__item {
+    padding: 1.5rem;
+  }
+}
