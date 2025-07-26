@@ -4,7 +4,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 function Particles({ count = 1000 }) {
   const mesh = useRef();
 
-  // Generate random positions
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {

@@ -166,6 +166,15 @@ textarea::placeholder {
   font-size: 0.85rem;
 }
 
+/* Disabled form inputs */
+input:disabled,
+textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(77, 181, 255, 0.1);
+}
+
 /* Beautiful Centered Button */
 .contact__btn {
   display: flex;
@@ -247,21 +256,37 @@ textarea::placeholder {
   transform: translateX(3px);
 }
 
-/* Loading state */
-.contact__btn:disabled {
-  opacity: 0.6;
+/* Loading state for button */
+.contact__btn.loading {
+  opacity: 0.8;
   cursor: not-allowed;
-  transform: none;
   pointer-events: none;
+  background: linear-gradient(135deg, #6c757d, #495057);
+  border-color: #6c757d;
 }
 
-.contact__btn:disabled:hover {
+.contact__btn.loading .btn__icon {
+  animation: spin 1s linear infinite;
+}
+
+.contact__btn.loading:hover {
   transform: none;
   box-shadow: 0 4px 15px rgba(77, 181, 255, 0.3);
+  background: linear-gradient(135deg, #6c757d, #495057);
+  border-color: #6c757d;
 }
 
-.contact__btn:disabled::before {
+.contact__btn.loading::before {
   left: -100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Success state */
@@ -273,6 +298,38 @@ textarea::placeholder {
 .contact__btn.success:hover {
   background: linear-gradient(135deg, #20c997, #28a745);
   border-color: #20c997;
+}
+
+/* Toast custom styles */
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #4db5ff, #2c2c6c) !important;
+  border: 1px solid rgba(77, 181, 255, 0.3);
+  border-radius: 1rem;
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 1rem;
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #4db5ff, #2c2c6c) !important;
+  cursor: pointer;
+  border: 1px solid rgba(77, 181, 255, 0.3);
+  border-radius: 1rem;
+}
+
+.Toastify__progress-bar--success {
+  background: #ffffff !important;
+}
+
+.Toastify__progress-bar--error {
+  background: #ffffff !important;
+}
+
+.Toastify__progress-bar--info {
+  background: #ffffff !important;
 }
 
 /* ========MEDIA QUERIES (MEDIUM DEVICES) ========== */
@@ -389,6 +446,10 @@ textarea::placeholder {
   .contact__option:hover,
   .contact__btn:hover {
     transform: none;
+  }
+
+  .contact__btn.loading .btn__icon {
+    animation: none;
   }
 }
 

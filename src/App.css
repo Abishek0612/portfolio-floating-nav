@@ -1,0 +1,148 @@
+/* Add these styles to your existing App.css */
+
+/* Custom Toast Styling */
+.custom-toast {
+  border-radius: 1rem !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 8px 32px rgba(77, 181, 255, 0.2) !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.custom-toast-body {
+  padding: 0.5rem !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+}
+
+.custom-toast-progress {
+  height: 4px !important;
+  border-radius: 0 0 1rem 1rem !important;
+}
+
+/* Success Toast */
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #4db5ff, #2c2c6c) !important;
+  border: 1px solid rgba(77, 181, 255, 0.4) !important;
+}
+
+.Toastify__toast--success .Toastify__progress-bar {
+  background: #ffffff !important;
+}
+
+/* Error Toast */
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24) !important;
+  border: 1px solid rgba(255, 107, 107, 0.4) !important;
+}
+
+.Toastify__toast--error .Toastify__progress-bar {
+  background: #ffffff !important;
+}
+
+/* Info Toast */
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #4db5ff, #2c2c6c) !important;
+  border: 1px solid rgba(77, 181, 255, 0.4) !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease !important;
+}
+
+.Toastify__toast--info:hover {
+  transform: scale(1.02) !important;
+}
+
+.Toastify__toast--info .Toastify__progress-bar {
+  background: #ffffff !important;
+}
+
+/* Loading Toast */
+.Toastify__toast--default {
+  background: linear-gradient(135deg, #6c757d, #495057) !important;
+  border: 1px solid rgba(108, 117, 125, 0.4) !important;
+}
+
+.Toastify__toast--default .Toastify__progress-bar {
+  background: #ffffff !important;
+}
+
+/* Close Button Styling */
+.Toastify__close-button {
+  color: #ffffff !important;
+  opacity: 0.7 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1 !important;
+}
+
+/* Toast Container Positioning */
+.Toastify__toast-container {
+  z-index: 9999 !important;
+  margin-top: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+/* Responsive Toast Styling */
+@media screen and (max-width: 768px) {
+  .Toastify__toast-container {
+    width: 90vw !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    margin-right: 0 !important;
+  }
+
+  .custom-toast {
+    margin-bottom: 0.5rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  .custom-toast-body {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    width: 95vw !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .custom-toast {
+    min-height: auto !important;
+    padding: 0.75rem !important;
+  }
+}
+
+/* Animation Enhancements */
+.Toastify__slide-enter {
+  transform: translate3d(100%, 0, 0) !important;
+}
+
+.Toastify__slide-enter--top-right {
+  transform: translate3d(100%, 0, 0) !important;
+}
+
+.Toastify__slide-exit--top-right {
+  transform: translate3d(100%, 0, 0) !important;
+}
+
+/* Loading spinner for loading toasts */
+.Toastify__spinner {
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid #ffffff !important;
+  border-top-color: transparent !important;
+  border-radius: 50% !important;
+  animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

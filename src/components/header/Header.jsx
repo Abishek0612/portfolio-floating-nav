@@ -8,7 +8,9 @@ import ParticleBackground from "../threejs/ParticleBackground";
 
 const Header = () => {
   return (
-    <header>
+    <header id="">
+      {" "}
+      {/* Add empty id for home navigation */}
       <ParticleBackground />
       <div className="container header__container">
         <motion.div

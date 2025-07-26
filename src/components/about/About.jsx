@@ -74,9 +74,9 @@ const About = () => {
             platforms.
           </p>
 
-          <a href="#contact" className="btn btn-primary">
+          <motion.a href="#contact" className="btn btn-primary">
             Let's Talk
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

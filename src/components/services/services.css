@@ -1,7 +1,13 @@
-/* Section Header - Centered */
+.services-section {
+  position: relative;
+  overflow: hidden;
+}
+
 .services__header {
   text-align: center;
   margin-bottom: 4rem;
+  position: relative;
+  z-index: 2;
 }
 
 .services__header h5 {
@@ -20,6 +26,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .service {
@@ -85,11 +93,13 @@
   margin: 0 auto 1.5rem;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
 }
 
 .service__icon svg {
   font-size: 2rem;
   color: var(--color-white);
+  transition: all 0.3s ease;
 }
 
 .service__head h3 {
@@ -97,6 +107,7 @@
   font-size: 1.3rem;
   margin-bottom: 1rem;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .service__description {
@@ -118,6 +129,7 @@
   gap: 1rem;
   margin-bottom: 1.2rem;
   align-items: flex-start;
+  transition: all 0.3s ease;
 }
 
 .service__list-icon {
@@ -125,6 +137,7 @@
   margin-top: 2px;
   font-size: 1.1rem;
   flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
 .service__list p {
@@ -132,17 +145,16 @@
   color: var(--color-light);
   line-height: 1.5;
   margin: 0;
+  transition: all 0.3s ease;
 }
 
-/* Hover effects for individual list items */
 .service__list li:hover {
   transform: translateX(5px);
-  transition: transform 0.2s ease;
 }
 
-.service__list li:hover .service__list-icon {
-  transform: scale(1.2);
-  transition: transform 0.2s ease;
+.service__list li:hover p {
+  color: var(--color-white);
+  text-shadow: 0 0 5px rgba(77, 181, 255, 0.3);
 }
 
 /* Remove overrides from section styles */
@@ -250,7 +262,6 @@
   }
 }
 
-/* Enhanced accessibility */
 @media (prefers-reduced-motion: reduce) {
   .service::before {
     transition: none;
@@ -263,38 +274,8 @@
   .service__list li:hover {
     transform: none;
   }
-}
 
-/* Dark theme enhancements */
-@media (prefers-color-scheme: dark) {
-  .service {
-    background: linear-gradient(
-      135deg,
-      var(--color-bg-variant),
-      rgba(77, 181, 255, 0.03)
-    );
-    border-color: rgba(77, 181, 255, 0.08);
-  }
-
-  .service:hover {
-    background: rgba(77, 181, 255, 0.06);
-  }
-}
-
-/* Print styles */
-@media print {
-  .service::before {
-    display: none;
-  }
-
-  .service {
-    background: white !important;
-    border: 1px solid #ccc !important;
-    break-inside: avoid;
-  }
-
-  .service__head {
-    background: #f8f9fa !important;
-    color: #333 !important;
+  .service__icon {
+    transition: none;
   }
 }

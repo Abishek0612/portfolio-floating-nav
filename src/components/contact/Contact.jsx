@@ -1,37 +1,106 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import "./contact.css";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { useRef } from "react";
 import emailjs from "emailjs-com";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const form = useRef();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    emailjs
-      .sendForm(
+    const loadingToast = toast.loading("Sending your message...", {
+      position: "top-right",
+      theme: "dark",
+    });
+
+    try {
+      const result = await emailjs.sendForm(
         "service_26ddlef",
         "template_8sr36jh",
         form.current,
         "3TMIj2BmlQ_qzjn91"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          alert("Message sent successfully!");
-        },
-        (error) => {
-          console.log(error.text);
-          alert("Failed to send message. Please try again.");
+      );
+
+      toast.dismiss(loadingToast);
+
+      toast.success(
+        "🎉 Message sent successfully! I'll get back to you soon.",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          style: {
+            background: "linear-gradient(135deg, #4db5ff, #2c2c6c)",
+            color: "#ffffff",
+          },
         }
       );
 
-    e.target.reset();
+      e.target.reset();
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+
+      toast.dismiss(loadingToast);
+
+      toast.error(
+        "❌ Failed to send message. Please try again or contact me directly.",
+        {
+          position: "top-right",
+          autoClose: 7000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          style: {
+            background: "linear-gradient(135deg, #ff6b6b, #ee5a24)",
+            color: "#ffffff",
+          },
+        }
+      );
+
+      const formData = new FormData(form.current);
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const message = formData.get("message");
+
+      const subject = `Portfolio Contact from ${name}`;
+      const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+      const mailtoLink = `mailto:uabishek.dev@gmail.com?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+
+      setTimeout(() => {
+        toast.info(
+          "📧 Click here to open your email client as an alternative",
+          {
+            position: "top-right",
+            autoClose: 10000,
+            onClick: () => window.open(mailtoLink, "_blank"),
+            style: {
+              background: "linear-gradient(135deg, #4db5ff, #2c2c6c)",
+              color: "#ffffff",
+              cursor: "pointer",
+            },
+          }
+        );
+      }, 2000);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -105,7 +174,6 @@ const Contact = () => {
           </motion.article>
         </motion.div>
 
-        {/* Contact Form */}
         <motion.form
           ref={form}
           onSubmit={sendEmail}
@@ -124,6 +192,7 @@ const Contact = () => {
               name="name"
               placeholder="Your Full Name"
               required
+              disabled={isLoading}
             />
           </motion.div>
 
@@ -138,6 +207,7 @@ const Contact = () => {
               name="email"
               placeholder="Your Email"
               required
+              disabled={isLoading}
             />
           </motion.div>
 
@@ -152,21 +222,23 @@ const Contact = () => {
               rows="7"
               placeholder="Your Message"
               required
+              disabled={isLoading}
             ></textarea>
           </motion.div>
 
           <motion.button
             type="submit"
-            className="contact__btn"
-            whileHover={{
-              scale: 1.02,
-            }}
-            whileTap={{ scale: 0.98 }}
+            className={`contact__btn ${isLoading ? "loading" : ""}`}
+            disabled={isLoading}
+            whileHover={!isLoading ? { scale: 1.02 } : {}}
+            whileTap={!isLoading ? { scale: 0.98 } : {}}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.9 }}
           >
-            <span className="btn__text">Send Message</span>
+            <span className="btn__text">
+              {isLoading ? "Sending..." : "Send Message"}
+            </span>
             <MailOutlineIcon className="btn__icon" />
           </motion.button>
         </motion.form>

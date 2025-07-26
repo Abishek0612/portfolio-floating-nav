@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Urbanist:ital,wght@1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Urbanist:ital,wght@1,700&display=swap");
 
 * {
   margin: 0;
@@ -10,87 +10,86 @@
   text-decoration: none;
 }
 
-:root{
+:root {
   --color-bg: #1f1f38;
   --color-bg-variant: #2c2c6c;
   --color-primary: #4db5ff;
-  --color-primary-variant: rgba(77,181,255,0.4);
+  --color-primary-variant: rgba(77, 181, 255, 0.4);
   --color-white: #fff;
-  --color-light: rgba(255, 255,255,0.6);
+  --color-light: rgba(255, 255, 255, 0.6);
 
-  --transition: all  400ms ease;
-  --container-width-lg:75%;
-  --container-width-md:86%;
-  --container-width-sm:90%;
+  --transition: all 400ms ease;
+  --container-width-lg: 75%;
+  --container-width-md: 86%;
+  --container-width-sm: 90%;
 }
 
-
-html{
+html {
   scroll-behavior: smooth;
- 
 }
-
 
 ::-webkit-scrollbar {
   display: none;
 }
 
-body{
-  font-family: "Popins", sans-serif ;
+body {
+  font-family: "Poppins", sans-serif;
   background: var(--color-bg);
   color: var(--color-white);
   line-height: 1.7;
-  /* background-color: var(--color-bg); */
-  /* background-color: purple; */
 }
 
- /* ============General styles====== */
- .container {
+/* ============General styles====== */
+.container {
   width: var(--container-width-lg);
   margin: 0 auto;
- }
+}
 
- h1,
- h2,
- h3,
- h4,
- h5{
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-weight: 500;
- }
+}
 
- h1{
+h1 {
   font-size: 2.5rem;
- }
+}
 
- section {
+section {
   margin-top: 8rem;
+  scroll-margin-top: 80px;
+  position: relative; /* Important for containing Three.js effects */
+  overflow: hidden; /* Prevent effects from bleeding to other sections */
+  z-index: 1; /* Ensure proper stacking */
+}
 
- }
-
- section > h2, section  >h5{
+section > h2,
+section > h5 {
   text-align: center;
   color: var(--color-light);
- }
+}
 
- section >h2{
+section > h2 {
   color: var(--color-primary);
   margin-bottom: 3rem;
- }
+}
 
- .text-light{
-  color: var(--color-light)
- }
+.text-light {
+  color: var(--color-light);
+}
 
- a{
+a {
   color: var(--color-primary);
-  transition: var(--transition) ;
- }
+  transition: var(--transition);
+}
 
- a:hover{
+a:hover {
   color: var(--color-white);
- }
+}
 
- .btn{
+.btn {
   width: max-content;
   display: inline-block;
   color: var(--color-primary);
@@ -99,28 +98,41 @@ body{
   cursor: pointer;
   border: 1px solid var(--color-primary);
   transition: var(--transition);
- }
+}
 
- .btn:hover{
+.btn:hover {
   background: var(--color-white);
   color: var(--color-bg);
   border-color: transparent;
- }
+}
 
- .btn-primary{
+.btn-primary {
   background-color: var(--color-primary);
   color: var(--color-bg);
- }
+}
 
- img{
+img {
   display: block;
   width: 100%;
   object-fit: cover;
- }
+}
 
- /* ========MEDIA QUERIES (MEDIUM DEVICES) ========== */
+/* Section-specific Three.js containment */
+.experience-section,
+.services-section,
+.education-section {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
 
- @media screen and (max-width: 1024px) {
+.floating-code-container,
+.service-icons-container {
+  clip-path: inset(0); /* Ensure effects stay within section bounds */
+}
+
+/* ========MEDIA QUERIES (MEDIUM DEVICES) ========== */
+@media screen and (max-width: 1024px) {
   .container {
     width: var(--container-width-md);
   }
@@ -128,17 +140,20 @@ body{
   section {
     margin-top: 6rem;
   }
- }
+}
 
-
- /* ========MEDIA QUERIES (SMALL DEVICES) ========== */
-
- @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .container {
     width: var(--container-width-sm);
   }
 
-  section >h2  {
+  section > h2 {
     margin-bottom: 2rem;
   }
- }
+
+  /* Hide Three.js effects on mobile for performance */
+  .floating-code-container,
+  .service-icons-container {
+    display: none;
+  }
+}

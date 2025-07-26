@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./experience.css";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import WorkIcon from "@mui/icons-material/Work";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import FloatingCodeElements from "../threejs/FloatingCodeElements";
 
 const Experience = () => {
+  const [sectionInView, setSectionInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setSectionInView(true);
+          } else {
+            setSectionInView(false);
+          }
+        });
+      },
+      {
+        threshold: 0.2, // More restrictive threshold
+        rootMargin: "0px 0px -100px 0px", // Only activate when well within section
+      }
+    );
+
+    const section = document.getElementById("experience");
+    if (section) {
+      observer.observe(section);
+    }
+
+    return () => {
+      if (section) {
+        observer.unobserve(section);
+      }
+    };
+  }, []);
+
   const workExperience = [
     {
       title: "Software Engineer",
@@ -53,9 +85,19 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience">
-      <h5>My Journey</h5>
-      <h2>Work Experience & Skills</h2>
+    <section id="experience" className="experience-section">
+      <motion.div
+        className="section-header"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.8 },
+        }}
+      >
+        <h5>My Journey</h5>
+        <h2>Work Experience & Skills</h2>
+      </motion.div>
 
       <div className="container experience__container">
         {/* Work Experience */}
@@ -65,18 +107,38 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h3>
+          <motion.h3
+            whileHover={{ scale: 1.05, color: "#4db5ff" }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <WorkIcon /> Professional Experience
-          </h3>
+          </motion.h3>
           {workExperience.map((job, index) => (
             <motion.div
               key={index}
               className="job__card"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: "0 15px 35px rgba(77, 181, 255, 0.2)",
+                background: "rgba(77, 181, 255, 0.05)",
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                delay: index * 0.2,
+              }}
             >
               <div className="job__header">
-                <h4>{job.title}</h4>
+                <motion.h4
+                  whileHover={{
+                    color: "#ffffff",
+                    textShadow: "0 0 10px rgba(77, 181, 255, 0.5)",
+                  }}
+                >
+                  {job.title}
+                </motion.h4>
                 <h5>{job.company}</h5>
                 <span className="job__period">
                   <CalendarTodayIcon /> {job.period}
@@ -84,10 +146,16 @@ const Experience = () => {
               </div>
               <ul className="job__achievements">
                 {job.achievements.map((achievement, i) => (
-                  <li key={i}>
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ x: 5 }}
+                  >
                     <VerifiedIcon className="achievement__icon" />
                     <span>{achievement}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </motion.div>
@@ -101,14 +169,29 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <div className="experience__frontend">
+          <motion.div
+            className="experience__frontend"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+          >
             <h3>Frontend Development</h3>
             <div className="experience__content">
               {skills.frontend.map((skill, index) => (
                 <motion.article
                   key={index}
                   className="experience__details"
-                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "rgba(77, 181, 255, 0.1)",
+                    borderRadius: "0.5rem",
+                  }}
+                  transition={{
+                    delay: index * 0.05,
+                    type: "spring",
+                    stiffness: 400,
+                  }}
                 >
                   <VerifiedIcon className="experience__details-icon" />
                   <div>
@@ -118,16 +201,31 @@ const Experience = () => {
                 </motion.article>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="experience__backend">
+          <motion.div
+            className="experience__backend"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+          >
             <h3>Backend Development</h3>
             <div className="experience__content">
               {skills.backend.map((skill, index) => (
                 <motion.article
                   key={index}
                   className="experience__details"
-                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "rgba(77, 181, 255, 0.1)",
+                    borderRadius: "0.5rem",
+                  }}
+                  transition={{
+                    delay: index * 0.05,
+                    type: "spring",
+                    stiffness: 400,
+                  }}
                 >
                   <VerifiedIcon className="experience__details-icon" />
                   <div>
@@ -137,9 +235,11 @@ const Experience = () => {
                 </motion.article>
               ))}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
+
+      <FloatingCodeElements isVisible={sectionInView} />
     </section>
   );
 };
